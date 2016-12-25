@@ -56,20 +56,27 @@ router.delete('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
-	User.findById(req.params.id)
+	User.findOne({
+		where: {  id: req.params.id  },
+		include: [Campus]
+	})
+	//??? produces obj w/in obj... results in error when trying to render: Objects are not valid as a React child
+	// .then((foundUser) => {
+	// 	let campus = foundUser.campus
+	// 	foundUser.campus = [];
+	// 	foundUser.campus.push(campus);
+	// })
+	//??? trying to rearrange into array does not work either; not even on front end
+	//User.findById(req.params.id)
 	.then((foundUser) => {
-		console.log('foundUser: ', foundUser)
-		if (foundUser) {
-			foundUser.getFormattedDob;
-			return foundUser
-		} else {
+		if (!foundUser) {
 			res.status(400).send("No such student found.")
 		}
-	})
-	.then((formattedUser) => {
-		res.send(formattedUser)
+		res.send(foundUser);
 	})
 	.catch(next);
 })
+
+
 
 module.exports = router;

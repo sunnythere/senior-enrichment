@@ -1,6 +1,7 @@
 'use strict';
-var Sequelize = require('sequelize')
-var db = require('../index.js')
+var Sequelize = require('sequelize');
+var db = require('../index.js');
+var Campus = require('./campus');
 
 
 module.exports = db.define('user', {
@@ -31,6 +32,15 @@ module.exports = db.define('user', {
          const dobString = this.dob.toString()
          return `${dobString.slice(4,10)}, ${dobString.slice(11, 15)}`;
          //toString starts w/ day of week
+      },
+      //??? why doesn't this work?  can I not refernce a diff model?
+      getCampusName: function() {
+         Campus.findOne({
+            where: { id: this.campusId }
+         })
+         .then((foundCampus) => {
+            return foundCampus.name;
+         })
       }
    }
 })

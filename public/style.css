@@ -197,15 +197,18 @@ button:hover {
    margin: .4em;
 }
 
-
-#delete_div {
-   display: inline;
+#campus_students_div {
+   padding: 0em 1em
+}
+#student_list {
+   list-style-type: circle;
+   margin: 0.5em;
 }
 
 /* pop up warning */
 .pop_div {
    position: absolute;
-   /* absolute references nearest positioned ancestor */
+   /* absolute references nearest positioned ancestor? */
    left: 350px;
    top: 200px;
    padding: 1.5em 1em 1em 1em;

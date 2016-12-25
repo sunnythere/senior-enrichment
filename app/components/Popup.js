@@ -11,7 +11,7 @@ export default (props) => {
 
 
             <button type="submit" className="hide" onClick={props.clearPopUp}>No, Go Back</button>
-            <button type="submit" className="delete" onClick={props.deleteForReal}><Link to={`/c/deleted/${props.selectedCampus.id}`}>Yes, Delete</Link></button>
+            <button type="submit" className="delete" onClick={props.deleteForReal}><Link to={props.path}>Yes, Delete</Link></button>
           </div>
           )
 }

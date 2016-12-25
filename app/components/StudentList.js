@@ -18,7 +18,7 @@ class StudentList extends React.Component {
         <div className="margin_div">
             <h3>Student List</h3>
 
-                  <Link to="/student/add"><button type="submit" className="add_edit_btn">add</button></Link>
+                  <Link to="/s/add"><button type="submit" className="add_edit_btn">add</button></Link>
 
             <ul>
             {

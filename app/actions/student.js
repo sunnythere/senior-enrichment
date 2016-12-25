@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {selectCampus} from './campus';
 
 
 
@@ -45,9 +46,25 @@ export const getAllStudents = () => {
 export const selectAStudent = (studentId) => {
    return (dispatch) => {
       axios.get(`/api/student/${studentId}`)
-      .then((res) => {
-         dispatch(selectStudent(res.data));
-      });
+      .then((res) => res.data)
+      .then((studentObj) => {
+         //rearrange studentObj
+         let studentCampus = studentObj.campus
+         studentObj.campus = [];
+         //studentObj.campus.push(studentCampus) doesn't work???
+         dispatch(selectStudent(studentObj))
+         dispatch(selectCampus(studentCampus))
+      })
+      .catch((err) => {
+         if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+         } else {
+            console.log('error', err.message);
+         }
+         console.log(err.config);
+      })
    }
 }
 

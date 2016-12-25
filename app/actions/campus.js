@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export const SELECT_CAMPUS = 'SELECT_CAMPUS';
 export const GET_CAMPUSES = 'GET_CAMPUSES';
-export const DELETED_CAMPUS = 'DELETED_CAMPUS'
 
 
 const getCampuses = (campuses) => {
@@ -13,19 +12,20 @@ const getCampuses = (campuses) => {
    }
 }
 
-const selectCampus = (campus) => {
+export const selectCampus = (campus) => {
    return {
       type: SELECT_CAMPUS,
       campus
    }
 }
 
-const deletedCampus = (campus) => {
-   return {
-      type: DELETED_CAMPUS,
-      campus
-   }
-}
+// const deletedCampus = (campus) => {
+//    return {
+//       type: DELETED_CAMPUS,
+//       campus
+//    }
+// }
+
 
 
 export const getAllCampuses = () => {
@@ -52,9 +52,7 @@ export const getAllCampuses = () => {
 export const selectACampus = (campusId) => {
    return (dispatch) => {
       axios.get(`/api/campus/${campusId}`)
-      .then((res) => {
-         dispatch(selectCampus(res.data));
-      })
+      .then((res) => dispatch(selectCampus(res.data)))
       .catch((err) => {
          if (err.response) {
             console.log(err.response.data);
@@ -133,3 +131,4 @@ export const deleteACampus = (campusId) => {
       });
    }
 }
+

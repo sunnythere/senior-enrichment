@@ -39,7 +39,12 @@ const onStudentEnter = () => {
 
 const onOneStudentEnter = (nextState) => {
    const studentId = nextState.params.id
-   store.dispatch(selectAStudent(studentId));
+   const selectedStudent = store.getState().student.selected
+      if (selectedStudent === {} || selectedStudent === undefined) {
+         store.dispatch(selectAStudent(studentId));
+      } else if (selectedStudent.id !== studentId) {
+         store.dispatch(selectAStudent(studentId));
+      }
 }
 
 const onCampusEditEnter = (nextState) => {

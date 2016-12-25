@@ -7,6 +7,19 @@ import Popup from './Popup';
 const mapStateToProps = (state) => {
    return {
       selectedCampus: state.campus.selected
+      /* state.campus.selected should look like:
+         selected: {
+            comment:
+            createdAt:
+            fields:
+            id:
+            location:
+            mascot:
+            name:
+            student: {studentObj}
+            updatedAt:
+         }
+      */
    }
 }
 
@@ -48,6 +61,7 @@ class OneCampus extends React.Component {
 
    const selectedCampus = this.props.selectedCampus;
    const message = `Hey!  You are about to delete ${selectedCampus.name} from your database.  Are you sure you want to do this??`
+ console.log('selectedCampus.students', selectedCampus.students)
 
      return (
       <div className="margin_div">
@@ -59,7 +73,7 @@ class OneCampus extends React.Component {
          <button type="submit" className="add_edit_btn" onClick={this.handleClick}>delete</button>
 
 
-         {this.state.clicked && <Popup clearPopUp={this.clearPopUp} deleteForReal={this.deleteForReal} selectedCampus={this.props.selectedCampus} message={message}/>}
+         {this.state.clicked && <Popup clearPopUp={this.clearPopUp} deleteForReal={this.deleteForReal} path={`/c/deleted/${this.props.selectedCampus.id}`} message={message}/>}
 
 
             <div >
@@ -92,11 +106,24 @@ class OneCampus extends React.Component {
                   : null
                }
                {
-                  // selectedCampus.studentBody ?
-                  // <div className="description_row">
-                  //    <h5>students:</h5> {props.students?}
-                  // </div>
-                  // : null
+
+                  selectedCampus.student ?
+                  /*
+                        student: [{studentObj}]
+                  */
+                   <div className="description_row">
+                     <h5>students:</h5> ({selectedCampus.student.length})
+                     <div id="campus_students_div">
+                     <ul id="student_list">
+                     {
+                     selectedCampus.student.map((studentObj) => {
+                        return <li key={studentObj.id}><Link to={`/student/${studentObj.id}`}>{studentObj.lastName}, {studentObj.firstName}</Link></li>
+                     })
+                     }
+                     </ul>
+                     </div>
+                   </div>
+                   : null
                }
 
             </div>

@@ -21,18 +21,6 @@ module.exports = db.define('campus', {
 	},
 	comment: {
 		type: Sequelize.STRING
-	},
-},{
-	getterMethods: {
-		studentBody: () => {
-			return User.findAndCountAll({
-				where: { campusId: this.id }
-			})
-			.then((result) => {
-				return `count: ${result.count} \n
-							students: ${result.rows}`
-			})
-		}
 	}
 })
 

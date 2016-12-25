@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Campus = require('../db/models/campus')
+const Campus = require('../db/models/campus');
+const User = require('../db/models/user');
 
 // api/campus/
 
@@ -63,15 +64,19 @@ router.delete('/:id', (req, res, next) => {
 
 
 router.get('/:id', (req, res, next) => {
-	Campus.findById(req.params.id)
+	Campus.findOne({
+		where: { id: req.params.id },
+		include: [{ model: User, as: 'student' }]
+	})
 	.then((foundCampus) => {
 		if (foundCampus) {
-			res.send(foundCampus)
+			res.send(foundCampus);
 		} else {
 			res.status(400).send("No such campus found.")
 		}
 	})
 	.catch(next);
 })
+
 
 module.exports = router;

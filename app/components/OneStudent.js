@@ -1,22 +1,27 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import {selectACampus} from '../actions/campus';
 
 const mapStateToProps = (state) => {
    return {
-      selectedStudent: state.student.selected
+      selectedStudent: state.student.selected,
+      selectedCampus: state.campus.selected
    }
 }
 
-const OneStudent = (props) => {
+class OneStudent extends React.Component {
 
-   const selectedStudent = props.selectedStudent;
+
+   render() {
+   console.log('props on onestudent: ', this.props)
+   const selectedStudent = this.props.selectedStudent;
 
      return (
         <div className="margin_div">
             <h3>{selectedStudent.firstName} {selectedStudent.lastName}</h3>
 
-      <Link to={`/student/edit/${props.params.id}`}><button type="submit" className="add_edit_btn">edit</button></Link>
+      <Link to={`/student/edit/${this.props.params.id}`}><button type="submit" className="add_edit_btn">edit</button></Link>
 
 
             <div >
@@ -56,17 +61,24 @@ const OneStudent = (props) => {
                   : null
                }
                {
-                  // selectedStudent.studentBody ?
-                  // <div className="description_row">
-                  //    <h5>students:</h5> {props.students?}
-                  // </div>
-                  // : null
+
+                   this.props.selectedCampus ?
+                  <div className="description_row">
+                     <h5>campus:</h5>
+
+                         <Link to={`/campus/${selectedStudent.campusId}`}key={selectedStudent.campusId}>
+                         {this.props.selectedCampus.name}
+                         </Link>
+
+                  </div>
+                  : null
                }
 
             </div>
 
         </div>
      )
+}
 }
 
 
