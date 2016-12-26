@@ -74,9 +74,50 @@ export const addNewStudent = (student) => {
       .then((res) => res.data)
       .then((newstudent) => {
          console.log("newstudent from actions page: ", newstudent)
+         dispatch(selectStudent(newstudent));
          const newStudentList = getState().student.list.concat(newstudent);
          dispatch(getStudents(newStudentList));
 
+      });
+   }
+}
+
+export const editAStudent = (campus) => {
+   return (dispatch) => {
+      axios.put(`/api/student/${campus.id}`, {campus})
+      .then((res) => res.data)
+      .then((updatedStudent) => {
+         dispatch(selectCampus(updatedStudent));
+      })
+      .catch((err) => {
+         if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+         } else {
+            console.log('error', err.message);
+         }
+         console.log(err.config);
+      });
+   }
+}
+
+export const alterStudentCampus = (studentId, newCampusId) => {
+   return (dispatch) => {
+      axios.put(`/api/student/${studentId}`, {campusId: newCampusId})
+      .then((res) => res.data)
+      .then((updatedStudent) => {
+         dispatch(selectCampus(updatedStudent));
+      })
+      .catch((err) => {
+         if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+         } else {
+            console.log('error', err.message);
+         }
+         console.log(err.config);
       });
    }
 }

@@ -65,6 +65,14 @@ class OneCampus extends React.Component {
 
      return (
       <div className="margin_div">
+
+      {
+         this.props.route.path === '/newcampus' &&
+         (<div>
+            <h5><em>New Campus Created:</em></h5>
+         </div>)
+      }
+
          <h3>{selectedCampus.name}</h3>
 
          <button type="submit" className="add_edit_btn"><Link to={`/c/edit/${selectedCampus.id}`}>edit</Link></button>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { addNewStudent } from '../actions/student';
 
 
@@ -11,7 +12,10 @@ const MapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => {
    return {
-      addNewStudent: (newStudent) => { dispatch(addNewStudent(newStudent)) }
+      addNewStudent: (newStudent) => {
+         dispatch(addNewStudent(newStudent));
+         browserHistory.push('/newstudent')
+      }
    }
 }
 

@@ -29,7 +29,7 @@ router.post('/', (req, res, next) => {
 
 
 router.put('/:id', (req, res, next) => {
-	console.log('req: ', req )
+
 	Campus.findById(req.params.id)
 	.then((foundCampus) => {
 		if (foundCampus) {
@@ -39,7 +39,6 @@ router.put('/:id', (req, res, next) => {
 		}
 	})
 	.then((updatedCampus) => {
-		console.log('from router, updatedCampus: ', updatedCampus)
 		res.send(updatedCampus)
 	})
 	.catch(next);
@@ -57,7 +56,7 @@ router.delete('/:id', (req, res, next) => {
 		}
 	})
 	.then(() => {
-		res.status(200)
+		res.status(200).send("Campus deleted.")
 	})
 	.catch(next);
 })

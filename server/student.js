@@ -39,16 +39,33 @@ router.post('/', (req, res, next) => {
 	})
 })
 
-router.put('/', (req, res, next) => {
-	User.update(req.body)
+router.put('/:id', (req, res, next) => {
+	console.log('req: ', req )
+	User.findById(req.params.id)
+	.then((foundUser) => {
+		if (foundUser) {
+			return foundUser.update(req.body)
+		} else {
+			res.status(400).send("No such student found.")
+		}
+	})
 	.then((updatedUser) => {
 		res.send(updatedUser)
 	})
 	.catch(next);
 })
 
-router.delete('/', (req, res, next) => {
-	User.destroy(req.body)
+
+router.delete('/:id', (req, res, next) => {
+		console.log('req.body: ', req.body )
+	User.findById(req.params.id)
+	.then((foundUser) => {
+		if (foundUser) {
+			foundUser.destroy(req.body)
+		} else {
+			res.status(400).send("No such student found.")
+		}
+	})
 	.then(() => {
 		res.status(200).send("User profile deleted.")
 	})

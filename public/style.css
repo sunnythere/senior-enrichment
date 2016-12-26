@@ -100,6 +100,10 @@ input[type=text], textarea {
    height: 2.5em;
 }
 
+ul {
+   margin: 0em;
+}
+
 /* name craziness */
 input.name1 {
    width: 97%;
@@ -111,7 +115,7 @@ input.name {
    display: inline-block;
    margin: 0em 0em -1em .5em;
 }
-#first_name_div, #last_name_div {
+.leftside_form_div, .rightside_form_div {
    display: inline-block;
    width: 50%;
 
@@ -205,6 +209,26 @@ button:hover {
    margin: 0.5em;
 }
 
+#campus_students_div_small {
+   padding: 0em 0em
+}
+#student_list_small {
+   font-size: small;
+   list-style-type: circle;
+   margin: 0.5em;
+}
+#delete_student {
+   font-size: x-small;
+}
+#add_name_field {
+   display: inline;
+   width: 80%;
+}
+#add_student_div {
+   padding-left: 30px;
+}
+
+
 /* pop up warning */
 .pop_div {
    position: absolute;
@@ -224,3 +248,5 @@ button:hover {
    display: block;
    margin: .7em auto;
 }
+
+

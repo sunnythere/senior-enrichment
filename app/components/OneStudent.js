@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {selectACampus} from '../actions/campus';
 
 const mapStateToProps = (state) => {
    return {
@@ -18,10 +17,20 @@ class OneStudent extends React.Component {
    const selectedStudent = this.props.selectedStudent;
 
      return (
-        <div className="margin_div">
+      <div className="margin_div">
+
+
+      {
+         this.props.route.path === '/newstudent' &&
+         (<div>
+            <h5><em>New Student Profile Created:</em></h5>
+         </div>)
+      }
+
+
             <h3>{selectedStudent.firstName} {selectedStudent.lastName}</h3>
 
-      <Link to={`/student/edit/${this.props.params.id}`}><button type="submit" className="add_edit_btn">edit</button></Link>
+      <Link to={`/student/edit/${selectedStudent.id}`}><button type="submit" className="add_edit_btn">edit</button></Link>
 
 
             <div >
@@ -53,22 +62,16 @@ class OneStudent extends React.Component {
                   </div>
                   : null
                }
-               {
-                  selectedStudent.campus ?
-                  <div className="description_row">
-                     <h5>campus:</h5> {selectedStudent.campus}
-                  </div>
-                  : null
-               }
+
                {
 
                    this.props.selectedCampus ?
                   <div className="description_row">
                      <h5>campus:</h5>
 
-                         <Link to={`/campus/${selectedStudent.campusId}`}key={selectedStudent.campusId}>
-                         {this.props.selectedCampus.name}
-                         </Link>
+                      <Link to={`/campus/${selectedStudent.campusId}`}key={selectedStudent.campusId}>
+                      {this.props.selectedCampus.name}
+                      </Link>
 
                   </div>
                   : null

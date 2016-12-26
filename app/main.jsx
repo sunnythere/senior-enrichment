@@ -32,6 +32,13 @@ const onOneCampusEnter = (nextState) => {
    store.dispatch(selectACampus(campusId));
 }
 
+const onNewCampusEnter = () => {
+   const campusList = store.getState().campus.list
+   const campusIdArr = campusList.map(c => c.id);
+   const campusId = Math.max(campusIdArr);
+   store.dispatch(selectACampus(campusId));
+}
+
 const onStudentEnter = () => {
    store.dispatch(getAllStudents());
    console.log("onEnter")
@@ -47,10 +54,18 @@ const onOneStudentEnter = (nextState) => {
       }
 }
 
+const onNewStudentEnter = () => {
+   const studentList = store.getState().student.list
+   const studentIdArr = studentList.map(s => s.id);
+   const studentId = Math.max(studentIdArr);
+   store.dispatch(selectAStudent(studentId));
+}
+
 const onCampusEditEnter = (nextState) => {
    if (nextState.params.addedit === 'edit') {
       const campusId = nextState.params.id
       store.dispatch(selectACampus(campusId));
+      store.dispatch(getAllStudents());
    }
 
 }
@@ -75,6 +90,7 @@ render(
                   <Route path="/s/:addedit" component={AddEditStudent} onEnter={onCampusEnter}/>
                   <Route path="/s/:addedit:id" component={AddEditStudent} onEnter={onCampusEnter}/>
                </Route>
+               <Route path="/newstudent" component={OneStudent} onEnter={onNewStudentEnter} />
 
 
                <Route path="/campus" component={CampusContainer} onEnter={onCampusEnter} />
@@ -86,11 +102,11 @@ render(
                <Route component={AddEditCampusContainer} onEnter={onCampusEditEnter} >
 
                   <Route path="/c/:addedit" component={AddEditCampus} />
-                  <Route path="/c/:addedit/:id" component={AddEditCampus}  />
+                  <Route path="/c/:addedit/:id" component={AddEditCampus} />
                   {//??? does dropdown menu component need to be included in this hierarchy?
                   }
                </Route>
-
+               <Route path="/newcampus" component={OneCampus} onEnter={onNewCampusEnter} />
 
          </Route>
          <Route path="*" component={Lost} />

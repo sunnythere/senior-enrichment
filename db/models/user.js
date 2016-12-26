@@ -34,13 +34,13 @@ module.exports = db.define('user', {
          //toString starts w/ day of week
       },
       //??? why doesn't this work?  can I not refernce a diff model?
-      getCampusName: function() {
-         Campus.findOne({
-            where: { id: this.campusId }
-         })
-         .then((foundCampus) => {
-            return foundCampus.name;
-         })
-      }
+      // getCampusName: function() {
+      //    Campus.findOne({
+      //       where: { id: this.campusId }
+      //    })
+      //    .then((foundCampus) => {
+      //       return foundCampus.name;
+      //    })
+      // }
    }
 })

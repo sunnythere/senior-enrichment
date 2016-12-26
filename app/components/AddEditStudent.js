@@ -19,11 +19,11 @@ return (
 
                <label htmlFor="name"> Name </label><br/>
 
-               <div id="first_name_div">
+               <div className="leftside_form_div">
                   <input type="text" value={props.firstName}  name="firstName" className="input_text name1" />
                   <span className="name_span1">First</span>
                </div>
-               <div id="last_name_div">
+               <div className="rightside_form_div">
                   <input type="text" value={props.lastName}  name="lastName" className="input_text name" />
                   <span className="name_span">Last</span>
                </div>
@@ -54,7 +54,7 @@ return (
             </div>
             <div>
 
-               <div id="first_name_div">
+               <div className="leftside_form_div">
                <label htmlFor="status"> Status </label>
                <select name="status" className="input_select left">
                   <option default>--Select Status--</option>
@@ -64,7 +64,7 @@ return (
                </select>
                </div>
 
-               <div id="last_name_div">
+               <div className="rightside_form_div">
                <label htmlFor="campus">  &nbsp; Campus </label>
                <select name="campus" className="input_select right">
                <option default>--Select Campus--</option>
